@@ -1,0 +1,17 @@
+{
+  "name": "nhentai-api",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "axios": "*",
+    "express": "*",
+    "morgan": "*",
+    "pdfkit": "^0.13.0"
+  },
+  "devDependencies": {
+    "@vercel/node": "^1.12.1"
+  }
+}

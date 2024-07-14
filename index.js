@@ -95,10 +95,22 @@ const app = express()
 	.set('json spaces', 4)
 	.use(morgan('dev'))
 	.use(express.json())
-	.all('/', (_, res) => res.send('Hello World'))
-	.get('/id', async (req, res) => {
-		let q = req.query.url || req.query.query
-		if (!q) return res.json({ message: 'Input parameter url' })
+	.all('/', (_, res) => {
+		let baseUrl = `https://${_.get('host')}`
+		res.json({
+		author: `Mroy25`,
+		WA: `081215524272`,
+		runtime: new Date(process.uptime() * 1000).toTimeString().split(' ')[0],
+		endpoint: {
+			detail: `${baseUrl}/detail?code=212121`,
+			read: `${baseUrl}/read?code=212121`,
+			pdf: `${baseUrl}/pdf?code=212121`,
+		},
+	})
+})
+	.get('/detail', async (req, res) => {
+		let q = req.query.code
+		if (!q) return res.json({ message: 'Input parameter code' })
 		try {
 			let result = await getID(q)
 			res.send(result)
@@ -109,8 +121,8 @@ const app = express()
 		}
 	})
 	.get('/read', async (req, res) => {
-		let q = req.query.url || req.query.query
-		if (!q) return res.json({ message: 'Input parameter url' })
+		let q = req.query.code
+		if (!q) return res.json({ message: 'Input parameter code' })
 	try {
 		let result = await getID(q)
 		let restjson = result.pages
@@ -149,8 +161,8 @@ const app = express()
 		 }
 	})
 	.get('/pdf', async (req, res) => {
-		let q = req.query.url || req.query.query
-		if (!q) return res.json({ message: 'Input parameter url' })
+		let q = req.query.code
+		if (!q) return res.json({ message: 'Input parameter code' })
 		try {
 			let result = await getID(q)
 			let bufft = await toPDF(result.pages)
@@ -161,4 +173,4 @@ const app = express()
 			res.json({ message: e })
 		}
 	})
-	.listen(7860, () => console.log('App running on port 7860'))
+	.listen(5000, () => console.log('App running on port 5000'))

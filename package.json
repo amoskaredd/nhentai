@@ -1,9 +1,13 @@
 {
   "name": "nhentai-api",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.0.1",
+  "main": "index.js",
+  "engines": {
+    "node": "18.x"
+  },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "axios": "*",
@@ -12,6 +16,7 @@
     "pdfkit": "^0.13.0"
   },
   "devDependencies": {
-    "@vercel/node": "^1.12.1"
+    "@vercel/node": "^1.12.1",
+    "nodemon": "^3.0.1"
   }
 }
